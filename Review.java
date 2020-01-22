@@ -188,7 +188,8 @@ public class Review {
       else
       {
         placeholder += review.substring(i, i + 1);
-        
+        //Would use below line if I didn't use line 177
+        //removePunctuation(placeholder);
       }
     }
     return totalSentiment;

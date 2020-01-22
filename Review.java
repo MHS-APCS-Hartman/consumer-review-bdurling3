@@ -217,4 +217,38 @@ public class Review {
       }
       
   }
+  public static String fakeReview(String fileName)
+  {
+      String review = textToString(fileName);
+      String fReview = "";
+    
+      for(int i = 0; i < review.length() - 1; i++)
+      {
+         //Searches for the "*" and starts the word that you need to replace.
+         //Goes until you reach a space and replaces that word with a random adjective
+         //Once it reaches the space, the its stops meeting the isWord condition and breaks
+         // until it reaches another "*", it adds each character to the fReview string.
+         if(review.substring(i, i + 1).equals("*"))
+         {
+            i++;
+            String replacement = "";
+            boolean isWord = true;
+            while(isWord)
+            {
+                i++;
+                if(review.substring(i, i + 1).equals(" "))
+                {
+                    isWord = false;
+                }
+            }
+            repacement = randomAdjective() + " ";
+            fReview += replacement;
+         }
+         else
+         {
+             fReview += review.substring(i, i + 1);
+         }
+      }
+      return fReview;
+   }
 }

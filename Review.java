@@ -266,24 +266,24 @@ public class Review {
             boolean isWord = true;
             while(isWord)
             {
-                currAdj += review.substring(i, i + 1);
                 i++;
                 if(review.substring(i, i + 1).equals(" "))
                 {
                     isWord = false;
                 }
+                currAdj += review.substring(i, i + 1);
             }
-            if(totalSentiment(filename) >= 0 && sentimentVal(currAdj) >= 0)
+            if(totalSentiment(review) >= 0 && sentimentVal(currAdj) >= 0)
             {
                 replacement = currAdj + " ";
                 currAdj = "";
             }
-            else if(totalSentiment(filename) >= 0 && sentimentVal(currAdj) < 0)
+            else if(totalSentiment(review) >= 0 && sentimentVal(currAdj) < 0)
             {
                 replacement = randomPositiveAdj + " ";
                 currAdj = "";
             }
-            else if(totalSentiment(filename) < 0 && sentimentVal(currAdj) >= 0)
+            else if(totalSentiment(review) < 0 && sentimentVal(currAdj) >= 0)
             {
                 replacement = randomNegativeAdj + " ";
                 currAdj = "";

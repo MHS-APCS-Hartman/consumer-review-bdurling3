@@ -193,4 +193,28 @@ public class Review {
     }
     return totalSentiment;
   }
+  
+  public static int starRating(String filename)
+  {
+      if(totalSentiment(filename) > 4)
+      {
+         return 4;
+      else if(totalSentiment(filename) > 2)
+      {
+         return 3;
+      }
+      else if(totalSentiment(filename) > 0)
+      {
+         return 2;
+      }
+      else if(totalSentiment(filename) > -2)
+      {
+         return 1;
+      }
+      else
+      {
+         return 0;
+      }
+      
+  }
 }

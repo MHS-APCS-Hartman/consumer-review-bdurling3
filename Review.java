@@ -188,7 +188,7 @@ public class Review {
       else
       {
         placeholder += review.substring(i, i + 1);
-        //Would use below line if I didn't use line 177
+        //Would use below line if I didn't use line 177 "review = review.replaceAll("\\p{Punct}", "");"
         //removePunctuation(placeholder);
       }
     }
@@ -252,6 +252,9 @@ public class Review {
       }
       return fReview;
    }
+    /* This method goes through the review searching for adjectives. If the adjective's sentiment
+    value and the review's overall sentiment value match nothing changes, but if the values differ then 
+    the adjective is changed to a positive one or a negative one to strengthen the reviews sentiment value*/
    public static String fakeReviewStronger(String fileName)
    {
       String review = textToString(fileName);
@@ -274,25 +277,48 @@ public class Review {
                 }
                 currAdj += review.substring(i, i + 1);
             }
-            if(totalSentiment(review) >= 0 && sentimentVal(currAdj) >= 0)
+           
+            if(totalSentiment(review) > 0 && sentimentVal(currAdj) > 0)
             {
                 replacement = currAdj + " ";
                 currAdj = "";
+              //if the review's sentiment value is positive and the adjective's sentiment value is positive add the current
+              //adjective back into the review
             }
-            else if(totalSentiment(review) >= 0 && sentimentVal(currAdj) < 0)
+            else if(totalSentiment(review) > 0 && sentimentVal(currAdj) < 0)
             {
                 replacement = randomPositiveAdj + " ";
                 currAdj = "";
+              //if the review's sentiment value is positive and the adjective's sentiment value is negative change the 
+              //current adjective to a random positive adjective
             }
-            else if(totalSentiment(review) < 0 && sentimentVal(currAdj) >= 0)
+            else if(totalSentiment(review) < 0 && sentimentVal(currAdj) > 0)
             {
                 replacement = randomNegativeAdj + " ";
                 currAdj = "";
+              //if the review's sentiment value is negative and the adjective's sentiment value is positive change the 
+              //current adjective to a random negative adjective
             }
-            else
+            else if(totalSentiment(review) < 0 && sentimentVal(currAdj) < 0)
             {
                 replacement = currAdj + " ";
                 currAdj = "";
+               //if the review's sentiment value is negative and the adjective's sentiment value is negative add the current
+               //adjective back into the review
+            }
+            else if(totalSentiment(review) < 0 && sentimentVal(currAdj) == 0)
+            {
+                replacement = randomNegativeAdj + " ";
+                currAdj = "";
+                //if the review's sentiment value is negative and the adjective's sentiment value is 0, change the adjective
+                //to a random negative adjective
+            }
+            else
+            {
+                replacement = randomNegativeAdj + " ";
+                currAdj = "";
+                //if the review's sentiment value is positive and the adjective's sentiment value is 0(only combo left),
+                // change the adjective to a random positive adjective
             }
             fReview += replacement;
          }
